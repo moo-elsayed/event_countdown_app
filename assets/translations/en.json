@@ -2,5 +2,14 @@
   "app_name": "Event Countdown",
   "theme_mode": "Dark Mode",
   "theme_mode_light": "Light Mode",
-  "app_language": "App Language"
+  "app_language": "App Language",
+  "save": "SAVE",
+  "add_countdown": "Add Countdown",
+  "edit_countdown": "Edit Countdown",
+  "title": "Title",
+  "note": "Note",
+  "date": "Date",
+  "enter_title_here": "Enter title here",
+  "enter_note_here": "Enter Note here",
+  "time": "Time"
 }

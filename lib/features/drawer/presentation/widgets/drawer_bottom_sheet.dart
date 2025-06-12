@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LanguageBottomSheet extends StatelessWidget {
   const LanguageBottomSheet({super.key, required this.scaffoldKey});
@@ -35,7 +36,7 @@ class LanguageBottomSheet extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text(
                   'app_language'.tr(),
-                  style: const TextStyle(
+                  style: GoogleFonts.lato(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -80,7 +81,7 @@ class LanguageBottomSheet extends StatelessWidget {
 
       title: Text(
         languageCode == 'en' ? 'English' : 'العربية',
-        style: const TextStyle(color: Colors.white),
+        style: GoogleFonts.lato(color: Colors.white),
       ),
       activeColor: Colors.amber,
     );

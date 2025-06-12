@@ -2,5 +2,14 @@
   "app_name": "العد التنازلي للأحداث",
   "theme_mode": "الوضع الداكن",
   "theme_mode_light": "الوضع الفاتح",
-  "app_language": "لغة التطبيق"
+  "app_language": "لغة التطبيق",
+  "save": "حفظ",
+  "add_countdown": "إضافة عد تنازلي",
+  "edit_countdown": "تعديل العد التنازلي",
+  "title": "العنوان",
+  "note": "ملاحظة",
+  "date": "التاريخ",
+  "enter_title_here": "أدخل العنوان هنا",
+  "enter_note_here": "أدخل الملاحظة هنا",
+  "time": "الوقت"
 }

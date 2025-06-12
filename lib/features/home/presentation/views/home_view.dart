@@ -3,6 +3,9 @@ import 'package:event_countdown_app/constants.dart';
 import 'package:event_countdown_app/features/drawer/presentation/views/drawer_view.dart';
 import 'package:event_countdown_app/features/home/presentation/widgets/home_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../widgets/custom_floating_action_button.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -36,9 +39,10 @@ class _HomeViewState extends State<HomeView> {
         ),
         title: Text(
           context.tr('app_name'),
-          style: const TextStyle(color: Colors.white),
+          style:  GoogleFonts.lato(color: Colors.white),
         ),
       ),
+      floatingActionButton: const CustomFloatingActionButton(),
       body: const HomeViewBody(),
     );
   }

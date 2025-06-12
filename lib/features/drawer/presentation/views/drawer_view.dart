@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:event_countdown_app/features/drawer/presentation/managers/theme_cubit/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/drawer_bottom_sheet.dart';
 
 class DrawerView extends StatelessWidget {
@@ -23,7 +24,7 @@ class DrawerView extends StatelessWidget {
           ),
           child: Text(
             'app_name'.tr(),
-            style: const TextStyle(
+            style: GoogleFonts.lato(
               color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.w500,
@@ -35,7 +36,7 @@ class DrawerView extends StatelessWidget {
           onTap: () => themeCubit.changeMode(),
           title: Text(
             themeCubit.isDark ? 'theme_mode'.tr() : 'theme_mode_light'.tr(),
-            style: const TextStyle(
+            style: GoogleFonts.lato(
               color: Colors.white,
               fontWeight: FontWeight.w500,
             ),
@@ -70,14 +71,14 @@ class DrawerView extends StatelessWidget {
           leading: const Icon(Icons.language, color: Colors.white),
           title: Text(
             'app_language'.tr(),
-            style: const TextStyle(
+            style: GoogleFonts.lato(
               color: Colors.white,
               fontWeight: FontWeight.w500,
             ),
           ),
           subtitle: Text(
             context.locale.languageCode == 'en' ? 'English' : 'العربية',
-            style: const TextStyle(color: Colors.white70),
+            style: GoogleFonts.lato(color: Colors.white70),
           ),
         ),
       ],

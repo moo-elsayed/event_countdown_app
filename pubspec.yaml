@@ -39,6 +39,9 @@ dependencies:
   flutter_bloc: ^9.1.1
   shared_preferences: ^2.5.3
   page_transition: ^2.2.1
+  flutter_datetime_picker: ^1.5.1
+  gap: ^3.0.1
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
