@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/shared_preferences_manager.dart';
+import '../../../../../core/utils/shared_preferences_manager.dart';
 
 class ThemeCubit extends Cubit<ThemeStates> {
   ThemeCubit() : super(ThemeInitial());

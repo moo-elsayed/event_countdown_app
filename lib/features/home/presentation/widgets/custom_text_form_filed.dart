@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,6 +17,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.tapOnSuffixIcon,
     this.readOnly,
+    this.errorMessage,
   });
 
   final TextEditingController? controller;
@@ -24,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final IconData? suffixIcon;
   final TextInputType? keyboardType;
+  final String? errorMessage;
   final void Function(String)? onChanged;
   final void Function()? tapOnSuffixIcon;
 
@@ -36,8 +40,8 @@ class CustomTextFormField extends StatelessWidget {
       readOnly: readOnly ?? false,
       onChanged: onChanged,
       validator: (val) {
-        if (val!.isEmpty) {
-          return 'field is required';
+        if (val!.isEmpty && errorMessage != null) {
+          return errorMessage ?? 'field is required';
         }
         return null;
       },

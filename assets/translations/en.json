@@ -11,5 +11,12 @@
   "date": "Date",
   "enter_title_here": "Enter title here",
   "enter_note_here": "Enter Note here",
-  "time": "Time"
+  "time": "Time",
+  "optional": "(optional)",
+  "color": "Color",
+  "event_date_in_past": "Event date must be in the future",
+  "title_cannot_be_empty": "Title cannot be empty",
+  "error": "Error!",
+  "success": "Success",
+  "add_event_success": "Event added successfully!"
 }

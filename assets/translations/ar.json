@@ -11,5 +11,12 @@
   "date": "التاريخ",
   "enter_title_here": "أدخل العنوان هنا",
   "enter_note_here": "أدخل الملاحظة هنا",
-  "time": "الوقت"
+  "time": "الوقت",
+  "optional": "(اختياري)",
+  "color": "اللون",
+  "event_date_in_past": "يجب أن يكون وقت الحدث في المستقبل",
+  "title_cannot_be_empty": "لا يمكن أن يكون العنوان فارغًا",
+  "error": "خطأ!",
+  "success": "تم بنجاح",
+  "add_event_success": "تمت إضافة الحدث بنجاح!"
 }

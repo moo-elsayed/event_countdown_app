@@ -1,13 +1,15 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:event_countdown_app/features/drawer/presentation/managers/theme_cubit/theme_cubit.dart';
+import 'package:event_countdown_app/features/home/presentation/managers/add_event_cubit/add_event_cubit.dart';
+import 'package:event_countdown_app/features/home/presentation/managers/event_cubit/event_cubit.dart';
 import 'package:event_countdown_app/features/home/presentation/views/home_view.dart';
 import 'package:event_countdown_app/simple_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'core/shared_preferences_manager.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'constants.dart';
+import 'core/utils/shared_preferences_manager.dart';
+import 'features/home/data/event_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +18,11 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
 
   final bool isDark = await SharedPreferencesManager.getMode();
-  log(isDark.toString());
+
+  // init hive
+  await Hive.initFlutter();
+  Hive.registerAdapter(EventModelAdapter());
+  await Hive.openBox<EventModel>(KEventsBox);
 
   runApp(
     EasyLocalization(
@@ -36,8 +42,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeCubit()..setMode(isDark),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ThemeCubit()..setMode(isDark)),
+        BlocProvider(create: (context) => EventCubit()..fetchAllEvents()),
+      ],
       child: Builder(
         builder: (context) {
           ThemeCubit themeCubit = context.watch<ThemeCubit>();
