@@ -39,11 +39,11 @@ class _HomeViewState extends State<HomeView> {
         ),
         title: Text(
           context.tr('app_name'),
-          style:  GoogleFonts.lato(color: Colors.white),
+          style: GoogleFonts.lato(color: Colors.white),
         ),
       ),
       floatingActionButton: const CustomFloatingActionButton(),
-      body: const HomeViewBody(),
+      body: HomeViewBody(scaffoldKey: scaffoldKey),
     );
   }
 }

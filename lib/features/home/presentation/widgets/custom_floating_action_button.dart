@@ -14,14 +14,18 @@ class CustomFloatingActionButton extends StatelessWidget {
 
         context.pushTransition(
           type: isArabic
-              ? PageTransitionType
-                    .leftToRight
+              ? PageTransitionType.leftToRight
               : PageTransitionType.rightToLeft,
           child: const EventView(edit: false),
         );
       },
       backgroundColor: Colors.cyan,
-      child: const Icon(Icons.add,color: Colors.white),
+      elevation: 0,
+      shape: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(64),
+        borderSide: const BorderSide(width: 0, color: Colors.cyan),
+      ),
+      child: const Icon(Icons.add, color: Colors.white),
     );
   }
 }

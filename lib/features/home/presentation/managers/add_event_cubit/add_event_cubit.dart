@@ -11,6 +11,7 @@ class AddEventCubit extends Cubit<AddEventStates> {
 
   Color color = eventColors[0];
 
+
   addEvent({required EventModel event}) async {
     if (event.title.isEmpty) {
       emit(AddEventFailure(errorMessage: "title_cannot_be_empty".tr()));

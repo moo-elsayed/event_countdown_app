@@ -8,11 +8,13 @@ class Button extends StatelessWidget {
     required this.onPressed,
     required this.title,
     this.isLoading,
+    this.color,
   });
 
   final void Function() onPressed;
   final String title;
   final bool? isLoading;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,15 @@ class Button extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 0),
-        backgroundColor: Colors.cyan,
+        backgroundColor: color ?? Colors.cyan,
         foregroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.all(Radius.circular(4)),
+          borderRadius: BorderRadiusGeometry.all(Radius.circular(8)),
         ),
-        padding: const EdgeInsetsGeometry.symmetric(vertical: 12,horizontal: 24),
+        padding: const EdgeInsetsGeometry.symmetric(
+          vertical: 12,
+          horizontal: 24,
+        ),
       ),
       child: Text(title, style: GoogleFonts.lato(fontSize: 16)),
     );

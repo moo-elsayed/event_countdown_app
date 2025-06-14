@@ -9,7 +9,7 @@ class ColorItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: 18,
+      radius: 20,
       backgroundColor: color,
       child: isSelected ? const Icon(Icons.check, color: Colors.white) : null,
     );

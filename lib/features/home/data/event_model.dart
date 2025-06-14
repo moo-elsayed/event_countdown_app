@@ -4,16 +4,16 @@ part 'event_model.g.dart';
 @HiveType(typeId: 0)
 class EventModel extends HiveObject {
   @HiveField(0)
-  final String title;
+  String title;
 
   @HiveField(1)
-  final String? note;
+  String? note;
 
   @HiveField(2)
-  final int color;
+  int color;
 
   @HiveField(3)
-  final DateTime dateTime;
+  DateTime dateTime;
 
   EventModel({
     required this.title,

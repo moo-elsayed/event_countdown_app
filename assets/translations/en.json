@@ -18,5 +18,11 @@
   "title_cannot_be_empty": "Title cannot be empty",
   "error": "Error!",
   "success": "Success",
-  "add_event_success": "Event added successfully!"
+  "add_event_success": "Event added successfully!",
+  "event": "Event",
+  "countdown_ended": "Countdown Ended",
+  "no_events_scheduled": "No events available",
+  "tap_to_add_event": "Tap \"+\" to add an event",
+  "edit_event": "Edit Event",
+  "delete_event": "Delete Event"
 }

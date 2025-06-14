@@ -20,9 +20,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'custom_text_form_filed.dart';
 
 class EventViewBody extends StatefulWidget {
-  const EventViewBody({super.key, required this.edit});
+  const EventViewBody({super.key, required this.edit, this.event});
 
   final bool edit;
+  final EventModel? event;
 
   @override
   State<EventViewBody> createState() => _EventViewBodyState();
@@ -40,6 +41,35 @@ class _EventViewBodyState extends State<EventViewBody> {
   String? errorMessage;
 
   @override
+  void initState() {
+    if (widget.event != null) {
+      titleController.text = widget.event!.title;
+      noteController.text = widget.event!.note ?? '';
+
+      currentDate = DateTime(
+        widget.event!.dateTime.year,
+        widget.event!.dateTime.month,
+        widget.event!.dateTime.day,
+      );
+
+      currentTime = TimeOfDay(
+        hour: widget.event!.dateTime.hour,
+        minute: widget.event!.dateTime.minute,
+      );
+
+      currentTimeEN = DateFormat(
+        'hh:mm a',
+        'en',
+      ).format(widget.event!.dateTime);
+      currentTimeAR = DateFormat(
+        'hh:mm a',
+        'ar',
+      ).format(widget.event!.dateTime);
+    }
+    super.initState();
+  }
+
+  @override
   void dispose() {
     titleController.dispose();
     noteController.dispose();
@@ -50,6 +80,7 @@ class _EventViewBodyState extends State<EventViewBody> {
   Widget build(BuildContext context) {
     errorMessage = "title_cannot_be_empty".tr();
     AddEventCubit cubit = context.read<AddEventCubit>();
+    EventCubit eventCubit = context.read<EventCubit>();
     return BlocConsumer<AddEventCubit, AddEventStates>(
       listener: (context, state) {
         if (state is AddEventFailure) {
@@ -100,24 +131,51 @@ class _EventViewBodyState extends State<EventViewBody> {
                 const Gap(24),
                 Text("color".tr(), style: GoogleFonts.lato(fontSize: 16)),
                 const Gap(8),
-                ColorsListView(edit: widget.edit),
+                ColorsListView(
+                  edit: widget.edit,
+                  color: widget.event?.color != null
+                      ? Color(widget.event!.color)
+                      : null,
+                ),
                 const Gap(24),
                 Button(
                   onPressed: () {
-                    cubit.addEvent(
-                      event: EventModel(
-                        title: titleController.text,
-                        note: noteController.text,
-                        color: cubit.color.toARGB32(),
-                        dateTime: DateTime(
-                          currentDate.year,
-                          currentDate.month,
-                          currentDate.day,
-                          currentTime.hour,
-                          currentTime.minute,
+                    if (widget.edit) {
+                      eventCubit.editEvent(
+                        oldEvent: widget.event!,
+                        updatedEvent: EventModel(
+                          title: titleController.text,
+                          note: noteController.text,
+                          color: eventCubit.color.toARGB32(),
+                          dateTime: DateTime(
+                            currentDate.year,
+                            currentDate.month,
+                            currentDate.day,
+                            currentTime.hour,
+                            currentTime.minute,
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                      Future.delayed(
+                        const Duration(microseconds: 300),
+                        () => Navigator.pop(context),
+                      );
+                    } else {
+                      cubit.addEvent(
+                        event: EventModel(
+                          title: titleController.text,
+                          note: noteController.text,
+                          color: cubit.color.toARGB32(),
+                          dateTime: DateTime(
+                            currentDate.year,
+                            currentDate.month,
+                            currentDate.day,
+                            currentTime.hour,
+                            currentTime.minute,
+                          ),
+                        ),
+                      );
+                    }
                   },
                   title: "save".tr(),
                 ),
@@ -178,7 +236,7 @@ class _EventViewBodyState extends State<EventViewBody> {
             DateTime? pickedDate = await showDatePicker(
               context: context,
               firstDate: DateTime.now(),
-              initialDate: DateTime.now(),
+              initialDate: currentDate,
               lastDate: DateTime(2050),
             );
             log(pickedDate.toString());
@@ -205,7 +263,7 @@ class _EventViewBodyState extends State<EventViewBody> {
           tapOnSuffixIcon: () async {
             TimeOfDay? pickedTime = await showTimePicker(
               context: context,
-              initialTime: TimeOfDay.now(),
+              initialTime: currentTime,
             );
             log(pickedTime.toString());
             setState(() {

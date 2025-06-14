@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 const appBarColor = Color(0xff454449);
 const drawerColor = Color(0xff2E2E2E);
+const dividerColor = Color(0xffC4C4C4);
+const editEventColor = Color(0xff81C784);
+const deleteEventColor = Color(0xffE57373);
 const textFormFieldFillColor = Color(0xff1D1D1D);
 const textFormFieldBorderColor = Color(0xff979797);
 const KEventsBox = 'events_box';

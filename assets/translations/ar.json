@@ -18,5 +18,11 @@
   "title_cannot_be_empty": "لا يمكن أن يكون العنوان فارغًا",
   "error": "خطأ!",
   "success": "تم بنجاح",
-  "add_event_success": "تمت إضافة الحدث بنجاح!"
+  "add_event_success": "تمت إضافة الحدث بنجاح!",
+  "event": "حدث",
+  "countdown_ended": "انتهى العد التنازلي",
+  "no_events_scheduled": "لا توجد أحداث حالياً",
+  "tap_to_add_event": "اضغط على \"+\" لإضافة حدث ",
+  "edit_event": "تعديل الحدث",
+  "delete_event": "حذف الحدث"
 }
