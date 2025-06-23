@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'constants.dart';
+import 'core/services/local_notification_service.dart';
 import 'core/utils/shared_preferences_manager.dart';
 import 'features/home/data/event_model.dart';
 
@@ -16,6 +17,11 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   Bloc.observer = SimpleBlocObserver();
+
+  await Future.wait([
+    LocalNotificationService.init(),
+    LocalNotificationService.requestPermissions(),
+  ]);
 
   final bool isDark = await SharedPreferencesManager.getMode();
 

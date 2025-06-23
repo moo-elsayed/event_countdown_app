@@ -21,13 +21,13 @@ class EventModelAdapter extends TypeAdapter<EventModel> {
       note: fields[1] as String?,
       color: fields[2] as int,
       dateTime: fields[3] as DateTime,
-    );
+    )..notificationIds = (fields[4] as List?)?.cast<int>();
   }
 
   @override
   void write(BinaryWriter writer, EventModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -35,7 +35,9 @@ class EventModelAdapter extends TypeAdapter<EventModel> {
       ..writeByte(2)
       ..write(obj.color)
       ..writeByte(3)
-      ..write(obj.dateTime);
+      ..write(obj.dateTime)
+      ..writeByte(4)
+      ..write(obj.notificationIds);
   }
 
   @override

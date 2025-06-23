@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:easy_localization/easy_localization.dart'
     show
         DateFormat,
@@ -14,6 +13,7 @@ import 'package:event_countdown_app/features/home/presentation/widgets/button.da
 import 'package:event_countdown_app/features/home/presentation/widgets/colors_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -85,18 +85,16 @@ class _EventViewBodyState extends State<EventViewBody> {
       listener: (context, state) {
         if (state is AddEventFailure) {
           errorMessage = state.errorMessage;
-          showCustomSnackBar(
+          showCustomToast(
             context: context,
-            title: "error".tr(),
             message: errorMessage!,
             contentType: ContentType.failure,
           );
           autoValidateMode = AutovalidateMode.always;
           setState(() {});
         } else if (state is AddEventSuccess) {
-          showCustomSnackBar(
+          showCustomToast(
             context: context,
-            title: "success".tr(),
             message: "add_event_success".tr(),
             contentType: ContentType.success,
           );

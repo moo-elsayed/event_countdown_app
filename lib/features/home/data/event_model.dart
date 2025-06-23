@@ -15,6 +15,9 @@ class EventModel extends HiveObject {
   @HiveField(3)
   DateTime dateTime;
 
+  @HiveField(4)
+  List<int>? notificationIds;
+
   EventModel({
     required this.title,
     this.note,

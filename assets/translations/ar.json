@@ -24,5 +24,20 @@
   "no_events_scheduled": "لا توجد أحداث حالياً",
   "tap_to_add_event": "اضغط على \"+\" لإضافة حدث ",
   "edit_event": "تعديل الحدث",
-  "delete_event": "حذف الحدث"
+  "delete_event": "حذف الحدث",
+  "notification": {
+    "now": "الآن",
+    "in_5_minutes": "بعد 5 دقائق",
+    "in_1_hour": "بعد ساعة",
+    "in_1_day": "بعد يوم"
+  },
+  "tab_upcoming_events": "الأحداث القادمة",
+  "tab_past_events": "الأحداث السابقة",
+  "event_deleted_successfully": "تم حذف الحدث بنجاح",
+  "events_deleted_successfully": "تم حذف الأحداث السابقة بنجاح",
+  "event_edited_successfully": "تم تعديل الحدث بنجاح",
+  "delete_confirmation_title": "تأكيد الحذف",
+  "delete_confirmation_message": "هل أنت متأكد أنك تريد حذف جميع الأحداث السابقة؟ لا يمكن التراجع عن هذا الإجراء.",
+  "cancel": "إلغاء",
+  "delete_all": "حذف الكل"
 }

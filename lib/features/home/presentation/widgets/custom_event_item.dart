@@ -1,8 +1,10 @@
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_countdown_app/features/home/presentation/managers/event_cubit/event_cubit.dart';
 import 'package:event_countdown_app/features/home/presentation/widgets/event_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../constants.dart';
@@ -27,21 +29,16 @@ class CustomEventItem extends StatelessWidget {
     ).format(event.dateTime);
 
     final difference = event.dateTime.difference(DateTime.now());
-    // final days = difference.inDays;
-    // final hours = difference.inHours % 24;
-    // final minutes = difference.inMinutes % 60;
-    // final seconds = difference.inSeconds % 60;
-    //
-    // final timeText = days > 0
-    //     ? "$days d $hours h $minutes m $seconds s"
-    //     : "$hours h $minutes m $seconds s";
 
     return GestureDetector(
       onLongPress: () {
         showModalBottomSheet(
           context: context,
-          builder: (context) =>
-              EventBottomSheet(event: event, scaffoldKey: scaffoldKey),
+          builder: (context) => EventBottomSheet(
+            event: event,
+            scaffoldKey: scaffoldKey,
+            upcomingEvent: !difference.isNegative,
+          ),
         );
       },
       child: IntrinsicHeight(
@@ -117,38 +114,7 @@ class CustomEventItem extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                               textFormat: CountdownTextFormat.S,
-                              timeFormatterFunction:
-                                  (defaultFormatterFunction, duration) {
-                                    int totalSeconds = duration.inSeconds;
-
-                                    int days = totalSeconds ~/ (24 * 3600);
-                                    int hours =
-                                        (totalSeconds % (24 * 3600)) ~/ 3600;
-                                    int minutes = (totalSeconds % 3600) ~/ 60;
-                                    int seconds = totalSeconds % 60;
-
-                                    String formatNumber(int n) =>
-                                        n.toString().padLeft(2, '0');
-
-                                    String result = '';
-
-                                    if (days > 0) {
-                                      result += '${formatNumber(days)}:';
-                                    }
-
-                                    if (hours > 0 || days > 0) {
-                                      result += '${formatNumber(hours)}:';
-                                    }
-
-                                    if (minutes > 0 || hours > 0 || days > 0) {
-                                      result += '${formatNumber(minutes)}:';
-                                    }
-
-                                    result += formatNumber(seconds);
-
-                                    return result;
-                                  },
-
+                              timeFormatterFunction: timeFormatterFunction,
                               isReverse: true,
                               isReverseAnimation: true,
                             ),
@@ -188,5 +154,38 @@ class CustomEventItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  timeFormatterFunction(defaultFormatterFunction, duration) {
+    int totalSeconds = duration.inSeconds;
+
+    int days = totalSeconds ~/ (24 * 3600);
+    int hours = (totalSeconds % (24 * 3600)) ~/ 3600;
+    int minutes = (totalSeconds % 3600) ~/ 60;
+    int seconds = totalSeconds % 60;
+
+    String formatNumber(int n) => n.toString().padLeft(2, '0');
+
+    String result = '';
+
+    if (days > 0) {
+      result += '${formatNumber(days)}:';
+    }
+
+    if (hours > 0 || days > 0) {
+      result += '${formatNumber(hours)}:';
+    }
+
+    if (minutes > 0 || hours > 0 || days > 0) {
+      result += '${formatNumber(minutes)}:';
+    }
+
+    if (days == 0 && hours == 0 && minutes == 0 && seconds <= 9) {
+      result += seconds.toString(); // بدون padding
+    } else {
+      result += formatNumber(seconds); // 2 digits
+    }
+
+    return result;
   }
 }

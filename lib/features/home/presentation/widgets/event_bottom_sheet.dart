@@ -14,10 +14,12 @@ class EventBottomSheet extends StatelessWidget {
     super.key,
     required this.event,
     required this.scaffoldKey,
+    required this.upcomingEvent,
   });
 
   final EventModel event;
   final GlobalKey<ScaffoldState> scaffoldKey;
+  final bool upcomingEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -63,27 +65,31 @@ class EventBottomSheet extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
             child: Column(
-              spacing: 24,
               children: [
-                Button(
-                  onPressed: () {
-                    final isArabic = context.locale.languageCode == 'ar';
+                upcomingEvent
+                    ? Padding(
+                      padding: const EdgeInsets.only(bottom: 24),
+                      child: Button(
+                          onPressed: () {
+                            final isArabic = context.locale.languageCode == 'ar';
 
-                    Navigator.pop(context);
+                            Navigator.pop(context);
 
-                    Future.delayed(
-                      const Duration(microseconds: 500),
-                      () => scaffoldKey.currentContext!.pushTransition(
-                        type: isArabic
-                            ? PageTransitionType.leftToRight
-                            : PageTransitionType.rightToLeft,
-                        child: EventView(edit: true, event: event),
-                      ),
-                    );
-                  },
-                  title: "edit_event".tr(),
-                  color: editEventColor,
-                ),
+                            Future.delayed(
+                              const Duration(microseconds: 500),
+                              () => scaffoldKey.currentContext!.pushTransition(
+                                type: isArabic
+                                    ? PageTransitionType.leftToRight
+                                    : PageTransitionType.rightToLeft,
+                                child: EventView(edit: true, event: event),
+                              ),
+                            );
+                          },
+                          title: "edit_event".tr(),
+                          color: editEventColor,
+                        ),
+                    )
+                    : const SizedBox.shrink(),
                 Button(
                   onPressed: () {
                     cubit.deleteEvent(event: event);

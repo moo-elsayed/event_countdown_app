@@ -24,5 +24,20 @@
   "no_events_scheduled": "No events available",
   "tap_to_add_event": "Tap \"+\" to add an event",
   "edit_event": "Edit Event",
-  "delete_event": "Delete Event"
+  "delete_event": "Delete Event",
+  "notification": {
+    "now": "now",
+    "in_5_minutes": "in 5 minutes",
+    "in_1_hour": "in 1 hour",
+    "in_1_day": "in 1 day"
+  },
+  "tab_upcoming_events": "Upcoming Events",
+  "tab_past_events": "Past Events",
+  "event_deleted_successfully": "Event deleted successfully",
+  "events_deleted_successfully": "Past events deleted successfully",
+  "event_edited_successfully": "Event edited successfully",
+  "delete_confirmation_title": "Delete Confirmation",
+  "delete_confirmation_message": "Are you sure you want to delete all past events? This action cannot be undone.",
+  "cancel": "Cancel",
+  "delete_all": "Delete All"
 }
