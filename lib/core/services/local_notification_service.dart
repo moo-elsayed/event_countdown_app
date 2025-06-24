@@ -199,8 +199,6 @@
 //
 // }
 
-
-
 import 'dart:async';
 import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart' as context;
@@ -213,10 +211,10 @@ import '../../features/home/data/event_model.dart';
 
 class LocalNotificationService {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   static StreamController<NotificationResponse> streamController =
-  StreamController();
+      StreamController();
 
   // 1.setup
   static onTap(NotificationResponse notificationResponse) {
@@ -240,14 +238,14 @@ class LocalNotificationService {
     );
 
     const InitializationSettings initializationSettings =
-    InitializationSettings(
-      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-      iOS: DarwinInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
-        requestSoundPermission: true,
-      ),
-    );
+        InitializationSettings(
+          android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+          iOS: DarwinInitializationSettings(
+            requestAlertPermission: true,
+            requestBadgePermission: true,
+            requestSoundPermission: true,
+          ),
+        );
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
@@ -258,8 +256,8 @@ class LocalNotificationService {
     // Create and register the notification channel for Android 8.0 and above
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin
-    >()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(channel);
 
     // Request permissions after initialization
@@ -279,8 +277,8 @@ class LocalNotificationService {
     // For iOS, request permissions through flutter_local_notifications
     final iosImplementation = flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        IOSFlutterLocalNotificationsPlugin
-    >();
+          IOSFlutterLocalNotificationsPlugin
+        >();
 
     if (iosImplementation != null) {
       await iosImplementation.requestPermissions(
@@ -293,8 +291,8 @@ class LocalNotificationService {
     // Check if notifications are enabled using flutter_local_notifications
     final androidImplementation = flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin
-    >();
+          AndroidFlutterLocalNotificationsPlugin
+        >();
 
     if (androidImplementation != null) {
       final isEnabled = await androidImplementation.areNotificationsEnabled();
@@ -310,16 +308,16 @@ class LocalNotificationService {
   // Show immediate notification for when event time arrives
   static Future<void> showEventNotification({required EventModel event}) async {
     const AndroidNotificationDetails androidDetails =
-    AndroidNotificationDetails(
-      'event_channel',
-      'Event Notifications',
-      channelDescription: 'Notifications for upcoming events',
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      enableVibration: true,
-      ticker: 'Event Starting',
-    );
+        AndroidNotificationDetails(
+          'event_channel',
+          'Event Notifications',
+          channelDescription: 'Notifications for upcoming events',
+          importance: Importance.max,
+          priority: Priority.high,
+          playSound: true,
+          enableVibration: true,
+          ticker: 'Event Starting',
+        );
 
     const NotificationDetails notificationDetails = NotificationDetails(
       android: androidDetails,
@@ -366,8 +364,8 @@ class LocalNotificationService {
 
     // Define notification offsets - including 0 for event time
     List<Duration> offsets = [
-      const Duration(days: 1),    // 1 day before
-      const Duration(hours: 1),   // 1 hour before
+      const Duration(days: 1), // 1 day before
+      const Duration(hours: 1), // 1 hour before
       const Duration(minutes: 5), // 5 minutes before
       const Duration(seconds: 0), // At event time
     ];
@@ -395,7 +393,9 @@ class LocalNotificationService {
           );
 
           ids.add(id);
-          log('Scheduled notification for ${event.title} at $scheduledTime (${offsetMessage(offsets[i])})');
+          log(
+            'Scheduled notification for ${event.title} at $scheduledTime (${offsetMessage(offsets[i])})',
+          );
         } catch (e) {
           log('Error scheduling notification: $e');
         }
@@ -403,7 +403,9 @@ class LocalNotificationService {
     }
 
     if (ids.isEmpty) {
-      log('No notifications scheduled for ${event.title} - all times are in the past');
+      log(
+        'No notifications scheduled for ${event.title} - all times are in the past',
+      );
     }
 
     return ids;
@@ -421,17 +423,19 @@ class LocalNotificationService {
   // Get notification body text
   static String getNotificationBody(EventModel event, Duration offset) {
     String timeMessage = offsetMessage(offset);
-    String eventNote = event.note?.isNotEmpty == true ? '\n${event.note}' : '';
+    String eventNote = event.note?.isNotEmpty == true ? '${event.note}\n' : '';
 
     if (offset.inSeconds == 0) {
-      return context.tr('notification.event_starting_now') + eventNote;
+      return eventNote + context.tr('notification.event_starting_now');
     } else {
       return timeMessage + eventNote;
     }
   }
 
   static String offsetMessage(Duration offset) {
-    if (offset.inSeconds == 0) return context.tr('notification.event_starting_now');
+    if (offset.inSeconds == 0) {
+      return context.tr('notification.event_starting_now');
+    }
     if (offset.inMinutes == 5) return context.tr('notification.in_5_minutes');
     if (offset.inHours == 1) return context.tr('notification.in_1_hour');
     if (offset.inDays == 1) return context.tr('notification.in_1_day');
@@ -449,7 +453,8 @@ class LocalNotificationService {
   }
 
   // Get all pending notifications (for debugging)
-  static Future<List<PendingNotificationRequest>> getPendingNotifications() async {
+  static Future<List<PendingNotificationRequest>>
+  getPendingNotifications() async {
     return await flutterLocalNotificationsPlugin.pendingNotificationRequests();
   }
 
@@ -457,8 +462,8 @@ class LocalNotificationService {
   static Future<bool> areNotificationsEnabled() async {
     final androidImplementation = flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin
-    >();
+          AndroidFlutterLocalNotificationsPlugin
+        >();
 
     if (androidImplementation != null) {
       return await androidImplementation.areNotificationsEnabled() ?? false;
