@@ -26,10 +26,11 @@
   "edit_event": "Edit Event",
   "delete_event": "Delete Event",
   "notification": {
-    "now": "now",
-    "in_5_minutes": "in 5 minutes",
-    "in_1_hour": "in 1 hour",
-    "in_1_day": "in 1 day"
+    "now": "Now",
+    "in_5_minutes": "In 5 minutes",
+    "in_1_hour": "In 1 hour",
+    "in_1_day": "In 1 day",
+    "event_starting_now": "Event is starting now!"
   },
   "tab_upcoming_events": "Upcoming Events",
   "tab_past_events": "Past Events",

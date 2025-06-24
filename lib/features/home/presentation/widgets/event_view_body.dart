@@ -13,7 +13,6 @@ import 'package:event_countdown_app/features/home/presentation/widgets/button.da
 import 'package:event_countdown_app/features/home/presentation/widgets/colors_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -84,6 +83,7 @@ class _EventViewBodyState extends State<EventViewBody> {
     return BlocConsumer<AddEventCubit, AddEventStates>(
       listener: (context, state) {
         if (state is AddEventFailure) {
+          log(errorMessage!);
           errorMessage = state.errorMessage;
           showCustomToast(
             context: context,
@@ -159,6 +159,7 @@ class _EventViewBodyState extends State<EventViewBody> {
                         () => Navigator.pop(context),
                       );
                     } else {
+                      log(titleController.text);
                       cubit.addEvent(
                         event: EventModel(
                           title: titleController.text,

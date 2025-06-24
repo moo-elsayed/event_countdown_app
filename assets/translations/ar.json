@@ -27,9 +27,10 @@
   "delete_event": "حذف الحدث",
   "notification": {
     "now": "الآن",
-    "in_5_minutes": "بعد 5 دقائق",
-    "in_1_hour": "بعد ساعة",
-    "in_1_day": "بعد يوم"
+    "in_5_minutes": "خلال 5 دقائق",
+    "in_1_hour": "خلال ساعة",
+    "in_1_day": "خلال يوم",
+    "event_starting_now": "الحدث يبدأ الآن!"
   },
   "tab_upcoming_events": "الأحداث القادمة",
   "tab_past_events": "الأحداث السابقة",

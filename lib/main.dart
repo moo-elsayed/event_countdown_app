@@ -18,10 +18,12 @@ void main() async {
 
   Bloc.observer = SimpleBlocObserver();
 
-  await Future.wait([
-    LocalNotificationService.init(),
-    LocalNotificationService.requestPermissions(),
-  ]);
+  // await Future.wait([
+  //   LocalNotificationService.init(),
+  //   LocalNotificationService.requestPermissions(),
+  // ]);
+
+  await LocalNotificationService.init();
 
   final bool isDark = await SharedPreferencesManager.getMode();
 
